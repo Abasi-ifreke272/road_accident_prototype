@@ -11,8 +11,10 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 warnings.filterwarnings("ignore")
 
-with lzma.open("datasets/compressed_rf_model_v3.joblib.xz", "rb") as f:
+with lzma.open("compressed_rf_model_v3.joblib.xz", "rb") as f:
     rf_model = joblib.load(f)
+
+print(f"rf model => {rf_model}")
 
 # -------------------------
 # 📦 Load Data Function
