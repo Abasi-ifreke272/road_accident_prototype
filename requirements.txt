@@ -1,0 +1,10 @@
+#streamlit
+pandas
+plotly
+dataframe-image
+#folium
+#streamlit-folium
+joblib
+numpy
+scikit-learn==1.6.1
+
