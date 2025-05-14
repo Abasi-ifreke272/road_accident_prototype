@@ -11,6 +11,10 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 warnings.filterwarnings("ignore")
 
+import os
+st.write("Current directory contents:")
+st.write(os.listdir("."))
+
 try:
     with lzma.open("compressed_rf_model_v3.joblib.xz", "rb") as f:
         rf_model = joblib.load(f)
