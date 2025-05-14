@@ -61,7 +61,7 @@ def accident_severity_prediction_tab(df_merged):
             )
             # updated model in new_folder
             try:
-                rf_model = joblib.load('compressed_rf_model.joblib.xz')  # Ensure this is the correct file for RF model
+                rf_model = joblib.load('compressed_rf_model_v3.joblib.xz')  # Ensure this is the correct file for RF model
                 nn_model = joblib.load('compressed_nn_model.joblib.gz')
                 print(f"Random Forest model type: {type(rf_model)}")
                 print(f"NN model type: {type(nn_model)}")
