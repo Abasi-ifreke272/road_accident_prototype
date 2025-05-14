@@ -4,11 +4,15 @@ import numpy as np
 import plotly.express as px
 import plotly.figure_factory as ff
 import joblib
+import lzma
 import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 warnings.filterwarnings("ignore")
+
+with lzma.open("compressed_rf_model_v3.joblib.xz", "rb") as f:
+    rf_model = joblib.load(f)
 
 # -------------------------
 # 📦 Load Data Function
@@ -61,7 +65,7 @@ def accident_severity_prediction_tab(df_merged):
             )
             # updated model in new_folder
             try:
-                rf_model = joblib.load('compressed_rf_model_v3.joblib.xz')  # Ensure this is the correct file for RF model
+                rf_model = rf_model # Ensure this is the correct file for RF model
                 nn_model = joblib.load('compressed_nn_model.joblib.gz')
                 print(f"Random Forest model type: {type(rf_model)}")
                 print(f"NN model type: {type(nn_model)}")
