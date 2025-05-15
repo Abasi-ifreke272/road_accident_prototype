@@ -15,6 +15,28 @@ import os
 st.write("Current directory contents:")
 st.write(os.listdir("."))
 
+import requests
+import os
+
+@st.cache_resource
+def download_and_load_model():
+    model_url = "https://drive.google.com/uc?export=download&id=1jNw8fW3nj7c8EmCQ8-s3NI4W4NIUBE5s"
+    model_path = "compressed_rf_model_v4.joblib.xz"
+
+    if not os.path.exists(model_path):
+        print("Downloading model. This may take a moment...")
+        with requests.get(model_url, stream=True) as r:
+            r.raise_for_status()
+            with open(model_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        print("Model downloaded.")
+
+    return joblib.load(model_path)
+
+rf_model1 = download_and_load_model()
+print(f"rf model from drive: {rf_model1}")
+
 try:
     with lzma.open("compressed_rf_model_v3.joblib.xz", "rb") as f:
         rf_model = joblib.load(f)
@@ -75,7 +97,7 @@ def accident_severity_prediction_tab(df_merged):
             )
             # updated model in new_folder
             try:
-                rf_model = rf_model # Ensure this is the correct file for RF model
+                rf_model = rf_model1 # Ensure this is the correct file for RF model
                 nn_model = joblib.load('compressed_nn_model.joblib.gz')
                 print(f"Random Forest model type: {type(rf_model)}")
                 print(f"NN model type: {type(nn_model)}")
