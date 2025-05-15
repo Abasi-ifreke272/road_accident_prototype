@@ -5,20 +5,18 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import joblib
 import lzma
+import os
+import requests
 import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 warnings.filterwarnings("ignore")
 
-import os
 st.write("Current directory contents:")
 st.write(os.listdir("."))
 
-import requests
-import os
-
-@st.cache_resource
+#@st.cache_resource
 def download_and_load_model():
     model_url = "https://drive.google.com/uc?export=download&id=1jNw8fW3nj7c8EmCQ8-s3NI4W4NIUBE5s"
     model_path = "compressed_rf_model_v4.joblib.xz"
