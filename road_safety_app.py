@@ -37,14 +37,6 @@ def download_and_load_model():
 rf_model1 = download_and_load_model()
 print(f"rf model from drive: {rf_model1}")
 
-try:
-    with lzma.open("compressed_rf_model_v3.joblib.xz", "rb") as f:
-        rf_model = joblib.load(f)
-except Exception as e:
-    rf_model = None
-    st.error(f"Could not load model: {e}")
-
-print(f"rf model => {rf_model}")
 
 # -------------------------
 # 📦 Load Data Function
